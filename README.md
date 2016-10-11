@@ -73,15 +73,15 @@ $.tips('弹出一条5秒后自动消失的悬浮提示，仅限PC浏览器有效
 
 ###CSS说明
 
-`alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
-`alert_msg` 消息框主体
-`alert_content` 内容容器
-`alert_buttons` 底部按钮容器
-`alert_btn` 两个按钮公用class
-`alert_btn_ok` 确定按钮
-`alert_btn_cancel` 取消按钮
-`alert_tips` tips容器，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
-`alert_tips div` tips消息体
+-   `alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
+-   `alert_msg` 消息框主体
+-   `alert_content` 内容容器
+-   `alert_buttons` 底部按钮容器
+-   `alert_btn` 两个按钮公用class
+-   `alert_btn_ok` 确定按钮
+-   `alert_btn_cancel` 取消按钮
+-   `alert_tips` tips容器，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
+-   `alert_tips div` tips消息体
 
 
 
