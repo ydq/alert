@@ -6,9 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link id="libcss" rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<!-- 	<script type="text/javascript" src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script> -->
 	<script id="libjs" type="text/javascript" src="alert.min.js"></script>
-<!-- 	<style type="text/css">.container-fluid{padding-top:1em}</style> -->
 </head>
 <body>
 	<div class="container-fluid">
@@ -20,19 +18,19 @@
 					<button class="btn btn-default" type="button" id="alert">alert</button>
 					<button class="btn btn-default" type="button" id="confirm">confirm</button>
 					<button class="btn btn-default" type="button" id="tips">tips</button>
+					<button class="btn btn-default" type="button" id="load">load</button>
 					<a class="btn btn-default" href="weui-demo.html">weui</a>
 				</div>
 				<hr>
 				<pre>&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="alert.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-	$.alert('弹出了一个alert对话框',function(){
-		$.alert('你点击了确定')
-	})
+	$.alert('弹出了一个alert对话框')
 	$.confirm('弹出了一个confirm对话框',function(e){
 		$.alert('你点击了'+(e?'确定':'取消'))
 	})
 	$.tips('显示了一条tips')
+	$.load('显示了一条load信息')
 &lt;/script&gt;</pre>
 				<hr>
 				<div class="table-responsive">
@@ -47,34 +45,46 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td rowspan="2">alert</td>
-								<td>msg</td>
+								<td rowspan="2">$.alert</td>
+								<td>string</td>
 								<td>必须，弹窗消息</td>
 								<td rowspan="2">弹出一个只有确定按钮的对话框</td>
 							</tr>
 							<tr>
 								<td>function</td>
-								<td>可选，回调函数，点击确定后执行</td>
+								<td>可选，回调函数</td>
 							</tr>
 							<tr>
-								<td rowspan="2">confirm</td>
-								<td>msg</td>
+								<td rowspan="2">$.confirm</td>
+								<td>string</td>
 								<td>必须，弹窗消息</td>
 								<td rowspan="2">弹出一个有确定和取消两个按钮的对话框</td>
 							</tr>
 							<tr>
 								<td>function</td>
-								<td>可选，回调函数，点击按钮后执行，并根据点击的按钮传入true和false参数</td>
+								<td>可选，回调函数</td>
 							</tr>
 							<tr>
-								<td rowspan="2">tips</td>
-								<td>msg</td>
-								<td>必须，消息提示内容</td>
-								<td rowspan="2">弹出一个会自动消失的信息提示框，PC浏览器再右上角，手机浏览器再屏幕中下方</td>
+								<td rowspan="2">$.tips</td>
+								<td>string</td>
+								<td>必须，消息内容</td>
+								<td rowspan="2">弹出一个会自动消失的tips提示框</td>
 							</tr>
 							<tr>
-								<td>times</td>
-								<td>可选，自动消失的时间，针对PC浏览器有效，若不设置默认为2秒</td>
+								<td>int</td>
+								<td>可选，自动关闭的时间，仅PC浏览器有效</td>
+							</tr>
+							<tr>
+								<td>$.load</td>
+								<td>string</td>
+								<td>可选，消息内容</td>
+								<td>弹出一个没有任何操作按钮的对话框，需要手动关闭</td>
+							</tr>
+							<tr>
+								<td>$.loaded</td>
+								<td>无</td>
+								<td></td>
+								<td>关闭load对话框</td>
 							</tr>
 						</tbody>
 					</table>
@@ -83,7 +93,8 @@
 				<ul class="text-muted">
 					<li>合并css文件和js文件，方便引用</li>
 					<li>合并pc和mob，根据浏览器自动判断</li>
-					<li>移除其他功能保留最简单的使用体验</li>
+					<li>移除width和padding功能保留最简单的使用体验</li>
+					<li>添加load和loaded方法，并添加关闭动画，感谢<a class="text-primary" href="https://github.com/Zerolone" target="_blank">@Zerolone</a></li>
 					<li>为<a class="text-primary" href="https://github.com/weui/weui" target="_blank">weui</a>库定制了一个弹窗版本</li>
 				</ul>
 			</div>
@@ -93,16 +104,21 @@
 	$(function(){
 		$('#alert').on('click',function(){
 			$.alert('弹出了一个alert对话框',function(){
-				$.alert('你点击了确定')
+				$.alert('你点击了确定').ok('可修改按钮文本');
 			})
 		})
 		$('#confirm').on('click',function(){
-			$.confirm('弹出了一个confirm对话框',function(e){
-				$.alert('你点击了'+(e?'确定':'取消'))
-			})
+			$.confirm('弹出了一个confirm对话框，同意才能关闭',function(e){
+				e||this.content('你点击了不同意')
+				return e;
+			}).cancel('不同意').ok('同意')
 		})
 		$('#tips').on('click',function(){
 			$.tips('显示了一条tips')
+		})
+		$('#load').on('click',function(){
+			$.load();
+			setTimeout($.loaded,2000);
 		})
 	})
 	</script>
