@@ -1,94 +1,95 @@
 ##alert
-一款超小体积的PC、手机jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
+一款超小体积（自动适配手机和pc浏览器，集成了css，页面只需引入一个<5kb的js单文件）的jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
 
 [在线演示](http://alert.code.10176523.cn)，可自定义皮肤。
 
 ---
 
+###使用方法
+
+页面按顺序先引入jQuery（或ZeptoJS），然后再引入alert的js即可，无需引入css（最新版本已集成至js文件中）
+
+```html
+<script type="text/javascript" src="jquery.min.js"></script>
+<!-- 	<script type="text/javascript" src="zepto.min.js"></script> -->
+<script type="text/javascript" src="alert.min.js"></script>
+```
 ###使用demo
 
 ```javascript
 $.alert('消息弹窗')
 $.alert('消息弹窗',function(){
   //点击确定之后执行的回调函数
-  //return false 可以阻止对话框关闭
-  //this 指向弹窗对象
 })
 $.confirm('消息弹窗')
 $.confirm('消息弹窗',function(e){
   //点击确定或取消后的回调函数，点击确定e = true，点击取消e = false
-  //return false 可以阻止对话框关闭
-  //this 指向弹窗对象
 })
 $.tips('弹出一条2秒后自动消失的悬浮提示');
-$.tips('弹出一条5秒后自动消失的悬浮提示，仅限PC版本',5000);
+$.tips('弹出一条5秒后自动消失的悬浮提示，仅限PC浏览器有效',5000);
 ```
 
 ###插件API
 
-|版本|API|说明|
-|---|---|---|
-|PC/mob|$.alert(msg[,fn])|弹出一个仅包含确定按钮的对话框，`msg`为内容，`fn(可空)`为回调函数|
-|PC/mob|$.confirm(msg[,fn])|弹出一个确定/取消按钮的对话框，`msg`为内容，`fn(可空)`为回调函数|
-|PC|$.tips(msg[,time])|`屏幕右上角`弹出一个自动消失的悬浮提示，`time(可空)`为关闭时间，默认为2000（2s）|
-|mob|$.tips(msg)|`屏幕中间`弹出一个自动消失的悬浮提示|
+| 方法      | 参数       | 参数说明                                   | 方法说明               |
+| ------- | -------- | -------------------------------------- | ------------------ |
+| alert   | msg      | 必须，弹窗消息                                | 弹出一个只有确定按钮的对话框     |
+|         | function | 可选，回调函数，点击确定后执行                        |                    |
+| confirm | msg      | 必须，弹窗消息                                | 弹出一个有确定和取消两个按钮的对话框 |
+|         | function | 可选，回调函数，点击按钮后执行，并根据点击的按钮传入true和false参数 |                    |
+| tips    | msg      | 必须，消息提示内容                              | 弹出一个会自动消失的信息提示框    |
+|         | times    | 可选，自动消失的时间，针对PC浏览器有效，若不设置默认为2秒         |                    |
 
 
-###插件方法
-```javascript
-var dialog = $.alert('下面方法API中的dialog对象是这么获得的')
-$.confirm('回调中的this也是dialog对象',function(e){
-  //这里的this也是dialog对象
-  e||this.content('这样可以改变中间的内容')
-  return e;
-})
-```
-
-|版本|方法|说明|
-|---|---|---|
-|PC/mob|dialog.content(str)|修改对话框对象的内容|
-|PC/mob|dialog.ok(str)|修改确定按钮的文本|
-|PC/mob|dialog.cancel(str)|修改取消按钮的文本|
-|PC/mob|dialog.close()|关闭并销毁对话框|
-|PC|dialog.padding(str)|设置弹出窗的内容区域的填充，默认填充为css中设置的20|
-|PC|dialog.width(str)|设置弹出窗的宽度|
-
-
-####说明：
-- *`confirm`的回调函数默认有一个参数，参数值为`boolean`，当点击`确定`时参数为`ture`，当点击`取消`时参数为`false`*
-- *`alert`和`confirm`的回调函数如果`return false`，则可以`阻止对话框关闭`，在某些情况下比较有用*
-- *不管是`alert`、`confirm`还是`tips`，参数中的`msg`都`必须设置`，否则没有任何效果*
-- *`alert`和`confirm`中的回调函数中的`this`对象指向当前对话框对象，例如在回调函数中使用：`this.content('这样可以直接修改对话框中间的内容')`，再配合`return false`可以自己做更丰富的消息展示*
 
 ###弹窗出现后的Dom结构如下：
 ####alert和confirm的弹窗结构
 ```html
-<div class="alert_overlay">
+<div class="alert_overlay pc/mob"><!-- 根据PC和手机浏览器自动添加一个pc或mob的class -->
   <div class="alert_msg">
     <div class="alert_content">你的内容，可以是HTML</div>
     <div class="alert_buttons">
       <button class="alert_btn alert_btn_ok">确定</button>
-      <button class="alert_btn alert_btn_cancel">取消</button>
+      <button class="alert_btn alert_btn_cancel">取消</button><!-- alert没有此button -->
     </div>
   </div>
 </div>
 ```
-####pc版本tips结构(允许多次弹窗)
+####pc版本tips结构(允许多次弹窗，自动堆叠)
 ```html
-<div class="alert_tips">
+<div class="alert_tips pc">
   <div>tips1</div>
   <div>tips2</div>
   <div>tips3</div>
   <div>tips4</div>
 </div>
 ```
-####mob版本tips结构(不允许多次弹窗)
+####mob版本tips结构(不允许多次弹窗，新弹窗会覆盖之前的弹窗)
 ```html
-<div class="alert_tips">
+<div class="alert_tips mob">
   <div>tips</div>
 </div>
 ```
 
+###CSS说明
+
+`alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
+`alert_msg` 消息框主体
+`alert_content` 内容容器
+`alert_buttons` 底部按钮容器
+`alert_btn` 两个按钮公用class
+`alert_btn_ok` 确定按钮
+`alert_btn_cancel` 取消按钮
+`alert_tips` tips容器，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
+`alert_tips div` tips消息体
+
+
+
 ###兼容性
-- pc版本兼容IE8以上的版本，不支持IE8！！！请向前看！！！
-- mob版本未详细测试，理论ios和4.4以上的android手机都支持，关于微信内置浏览器，动不动就抽风，之前测试可以，中间有一段时间测试突然不行了，必须给css中一些css3的属性设置`-webkit-`前缀，也许以后又会好起来，所以默认没加上，如希望稳定兼容请自行在所有css3属性和动画前面添加前缀
+
+- 兼容现代浏览器和现代手机，旧版本的浏览器请自行测试，部分浏览器可能js本身是支持的，只是css可能不太兼容，如需兼容这类浏览器请自行修改css
+- 兼容Zepto1.1+、jQuery
+
+### 版权
+
+原创插件，随意复制随意修改随意传播，可不保留我的信息

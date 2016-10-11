@@ -4,200 +4,106 @@
 	<title>在线演示</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link id="libcss" rel="stylesheet" type="text/css" href="alert.css"/>
-	<link rel="stylesheet" type="text/css" href="http://highlight.code.10176523.cn/highlight.css">
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="http://highlight.code.10176523.cn/highlight.js"></script>
-	<script id="libjs" type="text/javascript" src="alert.js"></script>
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	<style>
-	body{background:#eee;font-family:PingFang SC,Microsoft YaHei;padding:0;margin:0}
-	#content{width:600px;max-width:100%;margin:auto;box-sizing:border-box;padding:20px;background:#fff;overflow:hidden;}
-	.github-button{display:none;}
-	.btn{border:1px solid #ccc;color:#666;display:inline-block;padding:3px 6px;cursor:pointer;font-size:14px;margin:5px 0;text-decoration:none}
-	.btn:hover{border-color:#aaa;color:#333;}
-	.new:before{content:'New';color:red;text-shadow:0 0 5px yellow;font-weight:bold;padding:0 5px;}
-	.hide{display:none}
-	.red{color:red}
-	table{width:100%;border-collapse: collapse;border:1px solid #ccc;font-size:14px;}
-	table th,table td{padding:5px;border:1px solid #ccc;}
-	@media screen and (max-width:600px) {table {border: 0;}table thead,table th {display: none;}table tr {margin-bottom: 10px;display: block;border-bottom: 2px solid #ddd;}table td {display: block;text-align: right;font-size: 13px;border-bottom: 1px dotted #ccc;}table td:last-child {border-bottom: 0;}table td:before {content: attr(data-label);float: left;text-transform: uppercase;font-weight: bold;}}
-	</style>
+	<link id="libcss" rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 	<script type="text/javascript" src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script> -->
+	<script id="libjs" type="text/javascript" src="alert.min.js"></script>
+<!-- 	<style type="text/css">.container-fluid{padding-top:1em}</style> -->
 </head>
 <body>
-	<div id="content">
-		<p>
-			<a class="github-button" href="https://github.com/ydq/alert/fork" data-style="mega" aria-label="Fork ydq/alert on GitHub">Fork</a>
-			<a class="github-button" href="https://github.com/ydq/alert" data-icon="octicon-star" data-style="mega" aria-label="Star ydq/alert on GitHub">Star</a>
-			<a class="github-button" href="https://github.com/ydq/alert/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega" aria-label="Download ydq/alert on GitHub">Download</a>
-		</p>
-
-		<div class="btn" id="demo1">带回调的alert</div>
-		<div class="hide">
-<pre><code class="language-javascript">//带回调函数的alert调用方式
-$.alert('这是alert',function(){
-	$.alert('你点击了确定')
-})</code></pre>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+				<h4><a href="https://github.com/ydq/alert" target="_blank">jQuery/Zepto 页面弹窗插件</a></h4>
+				<hr>
+				<div class="btn-group">
+					<button class="btn btn-default" type="button" id="alert">alert</button>
+					<button class="btn btn-default" type="button" id="confirm">confirm</button>
+					<button class="btn btn-default" type="button" id="tips">tips</button>
+					<a class="btn btn-default" href="weui-demo.html">weui</a>
+				</div>
+				<hr>
+				<pre>&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="alert.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	$.alert('弹出了一个alert对话框',function(){
+		$.alert('你点击了确定')
+	})
+	$.confirm('弹出了一个confirm对话框',function(e){
+		$.alert('你点击了'+(e?'确定':'取消'))
+	})
+	$.tips('显示了一条tips')
+&lt;/script&gt;</pre>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>方法</th>
+								<th>参数</th>
+								<th>参数说明</th>
+								<th>方法说明</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="2">alert</td>
+								<td>msg</td>
+								<td>必须，弹窗消息</td>
+								<td rowspan="2">弹出一个只有确定按钮的对话框</td>
+							</tr>
+							<tr>
+								<td>function</td>
+								<td>可选，回调函数，点击确定后执行</td>
+							</tr>
+							<tr>
+								<td rowspan="2">confirm</td>
+								<td>msg</td>
+								<td>必须，弹窗消息</td>
+								<td rowspan="2">弹出一个有确定和取消两个按钮的对话框</td>
+							</tr>
+							<tr>
+								<td>function</td>
+								<td>可选，回调函数，点击按钮后执行，并根据点击的按钮传入true和false参数</td>
+							</tr>
+							<tr>
+								<td rowspan="2">tips</td>
+								<td>msg</td>
+								<td>必须，消息提示内容</td>
+								<td rowspan="2">弹出一个会自动消失的信息提示框，PC浏览器再右上角，手机浏览器再屏幕中下方</td>
+							</tr>
+							<tr>
+								<td>times</td>
+								<td>可选，自动消失的时间，针对PC浏览器有效，若不设置默认为2秒</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p class="text-muted">最后更新日期：2016年10月11日</p>
+				<ul class="text-muted">
+					<li>合并css文件和js文件，方便引用</li>
+					<li>合并pc和mob，根据浏览器自动判断</li>
+					<li>移除其他功能保留最简单的使用体验</li>
+					<li>为<a class="text-primary" href="https://github.com/weui/weui" target="_blank">weui</a>库定制了一个弹窗版本</li>
+				</ul>
+			</div>
 		</div>
-
-
-		<div class="btn" id="demo2">带回调的confirm</div>
-		<div class="hide">
-<pre><code class="language-javascript">//带回调函数的confirm调用方式
-$.confirm('这是confirm',function(a){
-	$.alert('你点击了'+(a?'确定':'取消'))
-})</code></pre>
-		</div>
-
-
-
-		<div class="btn" id="demo3">return false阻止对话框关闭</div>
-		<div class="hide">
-<pre><code class="language-javascript">//回调函数中的this指向对话框对象
-//return false可以阻止对话框关闭
-$.confirm('点击确定不会关闭对话框！！', function(e) {
-	if(e){
-		this.content('回调函数阻止了对话框关闭，点击取消才能关闭！！');
-		return false;
-	}
-})</code></pre>
-		</div>
-
-
-		<div class="btn" id="demo4">显示一条tips消息</div>
-
-
-		<div class="btn new" id="demo5">自定义按钮文字</div>
-		<div class="hide">
-<pre><code class="language-javascript">//自定义按钮文字
-var dialog = $.confirm('自定义按钮文字');
-dialog.ok('ok').cancel('cancel');
-</code></pre>
-		</div>
-
-
-		<div class="btn new" id="demo6">自定义外观尺寸</div>
-		<div class="hide">
-<pre><code class="language-javascript">//自定义宽度，自定义内容区域的padding宽度
-$.confirm('&lt;iframe src="https://m.baidu.com/" width="100%" height="440" frameborder="no"/&gt;&lt;/iframe&gt;').padding(0).width(320).ok('关闭');
-</code></pre>
-		</div>
-		<br/>
-		<a id="mobdemo" class="btn" href="http://alert.code.10176523.cn/demo-mob.html">手机版演示</a>
-		<hr>
-		<p>使用文档：</p>
-		<table>
-			<tr>
-				<th>版本</th><th>API</th><th>说明</th>
-			</tr>
-			<tr>
-				<td data-label="版本">PC/mob</td>
-				<td data-label="API">$.alert(str[,fn])</td>
-				<td data-label="说明">弹出一个只包含确认按钮的对话框</td>
-			</tr>
-			<tr>
-				<td data-label="版本">PC/mob</td>
-				<td data-label="API">$.confrim(str[,fn])</td>
-				<td data-label="说明">弹出一个包含确认和取消按钮的对话框</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC</td>
-				 <td data-label="API">$.tips(str[,time])</td>
-				 <td data-label="说明">弹出一个自动消失的悬浮提示</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">mob</td>
-				 <td data-label="API">$.tips(str)</td>
-				 <td data-label="说明">弹出一个自动消失的悬浮提示，<span class="red">不支持自定义时间</span></td>
-			</tr>
-			<tr>
-				<th>版本</th><th>方法</th><th>说明</th>
-			</tr>
-			<tr>
-				<th colspan="3" align="left">
-<pre><code>var dialog = $.alert('下面方法API中的dialog对象是这么获得的')
-$.confirm('回调中的this也是dialog对象',function(e){
-  //这里的this也是dialog对象
-  e||this.content('这样可以改变中间的内容')
-  return e;
-})</code></pre>
-				</th>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC/mob</td>
-				 <td data-label="方法">dialog.content(str)</td>
-				 <td data-label="说明">修改对话框的内容</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC/mob</td>
-				 <td data-label="方法">dialog.ok(str)</td>
-				 <td data-label="说明">修改确认按钮文字</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC/mob</td>
-				 <td data-label="方法">dialog.cancel(str)</td>
-				 <td data-label="说明">修改取消按钮文字</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC/mob</td>
-				 <td data-label="方法">dialog.close()</td>
-				 <td data-label="说明">主动关闭对话框</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC</td>
-				 <td data-label="方法">dialog.padding(num)</td>
-				 <td data-label="说明">设置对话框消息容器的padding值</td>
-			</tr>
-			<tr>
-				 <td data-label="版本">PC</td>
-				 <td data-label="方法">dialog.width(num)</td>
-				 <td data-label="说明">设置对话框总宽度</td>
-			</tr>
-		</table>
-		<p>文档最后更新：2016年08月11日</p>
 	</div>
-
 	<script>
 	$(function(){
-		$('#mobdemo').on('click',function(){
-			$.alert('<iframe src="'+$(this).attr('href')+'" width="100%" height="180" frameborder="no"></iframe>').padding(0).width(320).ok('关闭');
-			return false
-		})
-		$('#demo1').on('click',function(){
-			$.alert('<div>演示代码</div>'+$(this).next().html(),function(){
-				$.alert('点击了确定')
+		$('#alert').on('click',function(){
+			$.alert('弹出了一个alert对话框',function(){
+				$.alert('你点击了确定')
 			})
 		})
-		$('#demo2').on('click',function(){
-			$.confirm('<div>演示代码</div>'+$(this).next().html(),function(e){
-				$.alert('点击了'+(e?'确定':'取消'))
+		$('#confirm').on('click',function(){
+			$.confirm('弹出了一个confirm对话框',function(e){
+				$.alert('你点击了'+(e?'确定':'取消'))
 			})
 		})
-		$('#demo3').on('click',function(){
-			$.confirm('<p class="red">点击确定不会关闭对话框！！</p><div>演示代码</div>'+$(this).next().html(),function(e){
-				if(e){
-					this.content('回调函数阻止了对话框关闭，点击取消才能关闭！！');
-					return false;
-				}
-			})
+		$('#tips').on('click',function(){
+			$.tips('显示了一条tips')
 		})
-		$('#demo4').on('click',function(){
-			Math.random()>0.5?$.tips('$.tips(\'你的提示消息，设置5秒后秒关闭\',5000)',5e3):$.tips('$.tips(\'你的提示消息，默认2秒关闭\')')
-		})
-		$('#demo5').on('click',function(){
-			$.confirm('<p class="red">自定义按钮文字！</p><div>演示代码</div>'+$(this).next().html()).ok('ok').cancel('cancel')
-		})
-		$('#demo6').on('click',function(){
-			$.confirm('<p class="red">可自定义宽度和消息框的padding！</p><div>演示代码</div>'+$(this).next().html(),function(e){
-				e&&$.confirm('<iframe src="https://m.baidu.com/" width="100%" height="440" frameborder="no"></iframe>',function(e){
-					if(!e){
-						$('#demo6').trigger('click')
-					}
-				}).padding(0).width(320).ok('关闭').cancel('返回查看代码');
-			}).ok('运行上面代码看效果').cancel('关闭')
-		})
-		$('pre').highlight();
-
 	})
 	</script>
 </body>

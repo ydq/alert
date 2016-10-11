@@ -4,25 +4,26 @@
 	<title>在线演示</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css">
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script id="libjs" type="text/javascript" src="alert.weui.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/weui/1.0.1/style/weui.min.css">
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+	<script id="libjs" type="text/javascript" src="alert.weui.min.js"></script>
 	<style type="text/css">#content{margin:auto;width:280px;padding:20px 0;}</style>
 </head>
 <body>
 	<div id="content">
-		<a href="javascript:;" class="weui_btn weui_btn_primary">①alert - title+msg+callback</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">②alert - msg+callback</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">③alert - title+msg</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">④alert - msg</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">⑤confirm - title+msg+callback</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">⑥confirm - msg+callback</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">⑦confirm - title+msg</a>
-		<a href="javascript:;" class="weui_btn weui_btn_primary">⑧confirm - msg</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">①alert - title+msg+callback</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">②alert - msg+callback</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">③alert - title+msg</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">④alert - msg</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">⑤confirm - title+msg+callback</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">⑥confirm - msg+callback</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">⑦confirm - title+msg</a>
+		<a href="javascript:;" class="weui-btn weui-btn_primary">⑧confirm - msg</a>
+		<a href="index.html" class="weui-btn weui-btn_primary">返回普通版本</a>
 	</div>
 	<script>
 	$(function(){
-		$('.weui_btn_primary').on('click',function(){
+		$('.weui-btn_primary').on('click',function(){
 			switch($(this).index()){
 				case 0:
 					$.alert('你的自定义标题','你的自定义对话框内容！！！',function(){$.alert('这是点击后的回调函数')})
