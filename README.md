@@ -112,7 +112,7 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
 ###CSS说明
 
 -   `alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
--   `alert_show`  用户显示和关闭动画
+-   `alert_show`  用于alert、confirm、load显示和关闭的css动画控制
 -   `alert_msg` 消息框主体
 -   `alert_content` 内容容器
 -   `alert_buttons` 底部按钮容器
