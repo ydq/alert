@@ -1,5 +1,5 @@
 ##alert
-一款超小体积（自动适配手机和pc浏览器，集成了css，页面只需引入一个<5kb的js单文件）的jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
+一款小体积（自动适配手机和pc浏览器，集成了css，页面只需引入一个5kb左右的js单文件）的jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
 
 [在线演示](http://alert.code.10176523.cn)，可自定义皮肤。
 
@@ -7,7 +7,7 @@
 
 ###使用方法
 
-页面按顺序先引入jQuery（或ZeptoJS），然后再引入alert的js即可，无需引入css（最新版本已集成至js文件中）
+页面按顺序先引入jQuery（或ZeptoJS），然后再引入alert的js即可
 
 ```html
 <script type="text/javascript" src="jquery.min.js"></script>
@@ -52,6 +52,12 @@ $.loaded(); //加载完成后调用
 | load    | string   | 可选，消息的内容                               | 弹出一个没有按钮的全屏遮罩消息，可用于加载中等提示 |
 | loaded  | 无        | 无                                      | 关闭load对话框                 |
 
+####说明：
+- *`confirm`的回调函数默认有一个参数，参数值为`boolean`，当点击`确定`时参数为`ture`，当点击`取消`时参数为`false`*
+- *`alert`和`confirm`的回调函数如果`return false`，则可以`阻止对话框关闭`，在某些情况下比较有用*
+- *不管是`alert`、`confirm`还是`tips`，参数中的`msg`都`必须设置`，否则没有任何效果*
+- *`alert`和`confirm`中的回调函数中的`this`对象指向当前对话框对象，例如在回调函数中使用：`this.content('这样可以直接修改对话框中间的内容')`，再配合`return false`可以自己做更丰富的消息展示*
+
 
 
 ### 插件方法
@@ -63,9 +69,9 @@ $.confirm('回调中的this也是dialog对象',function(e){
   e||this.content('这样可以改变中间的内容')
   return e;
 })
+var loading = $.load('数据努力加载中...');
+loading.close();//或者使用$.loaded();来关闭load弹出的消息
 ```
-
-
 
 | 方法                             | 参数     | 说明              |
 | ------------------------------ | ------ | --------------- |
@@ -74,16 +80,10 @@ $.confirm('回调中的this也是dialog对象',function(e){
 | dialog.cancel(str)             | string | 参数必须，修改取消按钮的文本  |
 | dialog.close() | 无      | 关闭并销毁对话框        |
 
-####说明：
-- *`confirm`的回调函数默认有一个参数，参数值为`boolean`，当点击`确定`时参数为`ture`，当点击`取消`时参数为`false`*
-- *`alert`和`confirm`的回调函数如果`return false`，则可以`阻止对话框关闭`，在某些情况下比较有用*
-- *不管是`alert`、`confirm`还是`tips`，参数中的`msg`都`必须设置`，否则没有任何效果*
-- *`alert`和`confirm`中的回调函数中的`this`对象指向当前对话框对象，例如在回调函数中使用：`this.content('这样可以直接修改对话框中间的内容')`，再配合`return false`可以自己做更丰富的消息展示*
-
 ###弹窗出现后的Dom结构如下：
 ####alert和confirm的弹窗结构
 ```html
-<div class="alert_overlay pc/mob"><!-- 根据PC和手机浏览器自动添加一个pc或mob的class -->
+<div class="alert_overlay alert_show pc/mob"><!-- 根据PC和手机浏览器自动添加一个pc或mob的class -->
   <div class="alert_msg">
     <div class="alert_content">你的内容，可以是HTML</div>
     <div class="alert_buttons">
@@ -112,6 +112,7 @@ $.confirm('回调中的this也是dialog对象',function(e){
 ###CSS说明
 
 -   `alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
+-   `alert_show`  用户显示和关闭动画
 -   `alert_msg` 消息框主体
 -   `alert_content` 内容容器
 -   `alert_buttons` 底部按钮容器
@@ -125,8 +126,8 @@ $.confirm('回调中的this也是dialog对象',function(e){
 
 ###兼容性
 
-- 兼容现代浏览器和现代手机，旧版本的浏览器请自行测试，部分浏览器可能js本身是支持的，只是css可能不太兼容，如需兼容这类浏览器请自行修改css
-- 兼容Zepto1.1+、jQuery
+- 兼容`IE10+`，`Android2+`，`iOS3+`
+- 兼容`Zepto1.1+`、`jQuery`
 
 ### 版权
 
