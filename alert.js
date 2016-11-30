@@ -4,7 +4,7 @@
  * $.alert(string[,function])
  * $.confirm(string[,function])
  * $.tips(string[,number])
- * version:2016-11-25
+ * version:2016-11-30
  */
 !function($){
 	//所有的css，可以自定义，css和Dom结构请参考 https://github.com/ydq/alert
@@ -27,12 +27,12 @@
 			.on('click','.alert_btn_ok',{r:!0},_click)
 			.on('click','.alert_btn_cancel',{r:!1},_click)
 			$._isload?d.find('.alert_content').css('text-align','center').parent().css({width:'auto',borderRadius:'4px'}).find('.alert_buttons').remove():($._isalert&&d.find('.alert_btn_cancel').remove())
-			d.ok =  function(t){d.find('.alert_btn_ok').text(t||'确定');return d}
-			d.cancel=function(t){d.find('.alert_btn_cancel').text(t||'取消');return d}
-			d.content=function(t){t&&d.find('.alert_content').html(t);return d}
-			d.close=function(){d.one('webkitTransitionEnd transitionEnd',function(){d.remove();delete $.loaded}).removeClass('alert_show')}
 			d.appendTo('body').find('.alert_btn_ok').focus();//让对话框打开后支持直接键盘回车触发确定按钮点击
-			setTimeout(function(){d.addClass('alert_show')},0);//解决浏览器优化导致不出现css3动画的问题
+			d.ok =  function(t){d.find('.alert_btn_ok').text(t||'确定');return d}
+			d.cancel = function(t){d.find('.alert_btn_cancel').text(t||'取消');return d}
+			d.content = function(t){t&&d.find('.alert_content').html(t);return d}
+			d.close = function(){d.one('webkitTransitionEnd transitionEnd',function(){d.remove();}).removeClass('alert_show')}
+			d.addClass('alert_show')
 		}
 		$._isalert=$._isload=0;
 		return d;
@@ -53,7 +53,7 @@
 		$('.alert_overlay').remove();
 		$._isload =1;
 		var d = $.confirm.call($,arguments[0]||"加载中，请稍后...");
-		$.loaded= d.close
+		$.loaded = d.close;
 		return d;
 	}
 }($)
