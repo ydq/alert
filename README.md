@@ -1,7 +1,7 @@
 ##alert
 一款小体积（自动适配手机和pc浏览器，集成了css，页面只需引入一个5kb左右的js单文件）的jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
 
-[在线演示](http://alert.code.10176523.cn)，可自定义皮肤。
+[在线演示](http://alert.darren.work)，可自定义皮肤。
 
 ---
 
