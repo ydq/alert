@@ -80,8 +80,8 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
 | dialog.cancel(str)             | string | 参数必须，修改取消按钮的文本  |
 | dialog.close() | 无      | 关闭并销毁对话框        |
 
-###弹窗出现后的Dom结构如下：
-####alert和confirm的弹窗结构
+### 弹窗出现后的Dom结构如下：
+#### alert和confirm的弹窗结构
 ```html
 <div class="alert_overlay alert_show pc/mob"><!-- 根据PC和手机浏览器自动添加一个pc或mob的class -->
   <div class="alert_msg">
@@ -93,7 +93,7 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
   </div>
 </div>
 ```
-####pc版本tips结构(允许多次弹窗，自动堆叠)
+#### pc版本tips结构(允许多次弹窗，自动堆叠)
 ```html
 <div class="alert_tips pc">
   <div>tips1</div>
@@ -102,7 +102,7 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
   <div>tips4</div>
 </div>
 ```
-####mob版本tips结构(不允许多次弹窗，新弹窗会覆盖之前的弹窗)
+#### mob版本tips结构(不允许多次弹窗，新弹窗会覆盖之前的弹窗)
 ```html
 <div class="alert_tips mob">
   <div>tips</div>
