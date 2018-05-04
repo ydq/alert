@@ -1,11 +1,11 @@
-##alert
+## alert
 一款小体积（自动适配手机和pc浏览器，集成了css，页面只需引入一个5kb左右的js单文件）的jQuery(Zepto)弹窗插件，可自己修改CSS定制自己的弹窗皮肤
 
-[在线演示](http://alert.darren.work)，可自定义皮肤。
+[在线演示](https://alert.darren.work)，可自定义皮肤。
 
 ---
 
-###使用方法
+### 使用方法
 
 页面按顺序先引入jQuery（或ZeptoJS），然后再引入alert的js即可
 
@@ -14,7 +14,7 @@
 <!-- <script type="text/javascript" src="zepto.min.js"></script> -->
 <script type="text/javascript" src="alert.min.js"></script>
 ```
-###使用demo
+### 使用demo
 
 ```javascript
 $.alert('消息弹窗')
@@ -39,7 +39,7 @@ $.load();   //支持默认的提示语句
 $.loaded(); //加载完成后调用
 ```
 
-###插件API
+### 插件API
 
 | 方法      | 参数       | 参数说明                                   | 方法说明                      |
 | ------- | -------- | -------------------------------------- | ------------------------- |
@@ -52,7 +52,7 @@ $.loaded(); //加载完成后调用
 | load    | string   | 可选，消息的内容                               | 弹出一个没有按钮的全屏遮罩消息，可用于加载中等提示 |
 | loaded  | 无        | 无                                      | 关闭load对话框                 |
 
-####说明：
+#### 说明：
 - *`confirm`的回调函数默认有一个参数，参数值为`boolean`，当点击`确定`时参数为`ture`，当点击`取消`时参数为`false`*
 - *`alert`和`confirm`的回调函数如果`return false`，则可以`阻止对话框关闭`，在某些情况下比较有用*
 - *不管是`alert`、`confirm`还是`tips`，参数中的`msg`都`必须设置`，否则没有任何效果*
@@ -109,7 +109,7 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
 </div>
 ```
 
-###CSS说明
+### CSS说明
 
 -   `alert_overlay`  背景遮罩，其中PC浏览器会多一个`.pc`的class，手机浏览器会多一个`.mob`的class
 -   `alert_show`  用于alert、confirm、load显示和关闭的css动画控制
@@ -124,7 +124,7 @@ loading.close();//或者使用$.loaded();来关闭load弹出的消息
 
 
 
-###兼容性
+### 兼容性
 
 - 兼容`IE10+`，`Android2+`，`iOS3+`
 - 兼容`Zepto1.1+`、`jQuery`
